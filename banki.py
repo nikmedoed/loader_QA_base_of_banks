@@ -67,10 +67,10 @@ def getQuestionList(url, idn):
             question = superConcat(q[0].getchildren()[1].getchildren()[0])
             answer = superConcat(q[1].getchildren()[1].getchildren()[0])
             question_url = q[0].getchildren()[1].getchildren()[1].getchildren()[0].get('href')
-            user = q[0].getchildren()[1].getchildren()[2].getchildren()[0].text.lstrip()
+            user = q[0].getchildren()[1].getchildren()[2].getchildren()[0].text.lstrip().rstrip()
             user_url = q[0].getchildren()[1].getchildren()[2].getchildren()[0].get('href')
             user_town = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n", "", q[0].getchildren()[1].getchildren()[
-                2].text_content()).lstrip()).rstrip()
+                2].text_content()).replace("(","").replace(")","").lstrip()).rstrip()
             question_time = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n.*", "", q[0].getchildren()[1].getchildren()[
                 2].text_content()).lstrip()).rstrip()
             expert = q[1].getchildren()[1].getchildren()[1].text_content().lstrip().rstrip()
@@ -91,9 +91,10 @@ def getQuestionList(url, idn):
             # except Exception:
             #     my_file.write("Exception\n\n\n\n")
             result.append({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
-                           'question_url': question_url, 'user': user, 'user_url': user_url,
+                           'question_url': "http://www.banki.ru" + question_url, 'user_name': user,
+                           'user_url': "http://www.banki.ru" + user_url,
                            'user_town': user_town, 'question_datetime': question_time,
-                           'expert': expert, 'accesdate': str(datetime.now())})
+                           'expert_name': expert, 'acces_date': str(datetime.now()), 'site': "http://www.banki.ru/"})
             # , question.xpath('td/strong/text()[1]'))
             # ,"http://www.banki.ru"+topic.get('href')])
 
@@ -150,7 +151,7 @@ my_file.close()
 topicList = [["БАНКРОТСТВО БАНКОВ", "http://www.banki.ru/services/questions-answers/?id=4826772"]]
 '''
 
-
+#TODO параллельная загрузка
 # возвращает список словарей - ответов. получает номер сайта для формирвоания ID вопроса-ответа в формате:
 # 2 символна на сайт,
 # 3 символа на раздел,
