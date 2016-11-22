@@ -64,8 +64,8 @@ def getQuestionList(url, idn):
         q = qu.getchildren()
         # print(html.tostring(qu.getchildren()[0], method='html', encoding='cp1251').decode("cp1251"))
         if len(q) > 1:  # если есть ответы
-            question = superConcat(q[0].getchildren()[1].getchildren()[0])
-            answer = superConcat(q[1].getchildren()[1].getchildren()[0])
+            question = superConcat(q[0].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
+            answer = superConcat(q[1].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
             question_url = q[0].getchildren()[1].getchildren()[1].getchildren()[0].get('href')
             user = q[0].getchildren()[1].getchildren()[2].getchildren()[0].text.lstrip().rstrip()
             user_url = q[0].getchildren()[1].getchildren()[2].getchildren()[0].get('href')
@@ -174,4 +174,5 @@ def getQAbankiru(n):
     for tL in topicList:
         n += 100000000
         banki_ru_base.extend(QAdriver(tL, n))
-        return banki_ru_base
+    print("банки.ру - возврашена база")
+    return banki_ru_base

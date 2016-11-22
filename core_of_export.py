@@ -1,5 +1,5 @@
 import banki
-
+import cbr
 
 def hdr_write (f, qa):
     file = open("ExportedFiles/qa"+ f + ".hdr", "w")
@@ -143,9 +143,11 @@ def export(t):
         htm_write_a(file, QA)
         htm_write_q(file, QA)
 
-# t = banki.getQAbankiru(1)
+# t = []
 
 t = banki.getQuestionList (['Банкротство банков', 'http://www.banki.ru/services/questions-answers/?id=4826772?p=0'], 100100000000)
+# t.extend(banki.getQAbankiru(1))
+# t.extend(cbr.getQAcbr(2))
 export(t)
 
 # t_file = open("ban.html", "w")
