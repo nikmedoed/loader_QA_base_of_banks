@@ -1,7 +1,7 @@
 import urllib.request
 from lxml import html
 import re
-from datetime import datetime, date, time
+from datetime import datetime
 
 # from selenium import webdriver
 # from lxml import etree
@@ -56,12 +56,17 @@ def getQuestionList(url, idn):
         user_town = ""
         question_time = "actual"
         expert = "ЦБ РФ"
+        expert_url = ""
+        expert_info = ""
+        answer_time = ""
         idn += 1
 
         result.append({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
                        'question_url': question_url, 'user_name': user, 'user_url':  user_url,
                        'user_town': user_town, 'question_datetime': question_time,
-                       'expert_name': expert, 'acces_date': str(datetime.now()), 'site': "http://www.cbr.ru/"})
+                       'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                       'answer_time': answer_time,'acces_date': str(datetime.now()),
+                       'site': "http://www.cbr.ru/Reception/Faq/"})
 
     return result
 
@@ -77,7 +82,6 @@ def getQAcbr(n):
     # print(topicList)
     print("ЦБ РФ - получен спискок тем / старт парсинга")
     # topicList = [topicList[0]]
-    print("банки.ру - получен спискок тем / старт парсинга")
     banki_ru_base = []
     for tL in topicList:
         n += 100000000

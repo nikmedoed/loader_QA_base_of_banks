@@ -1,7 +1,7 @@
 import urllib.request
 from lxml import html
 import re
-from datetime import datetime, date, time
+from datetime import datetime
 
 # from selenium import webdriver
 # from lxml import etree
@@ -22,8 +22,8 @@ def getListOfthemes(url):
 # из блока вопрос или ответ получаем текс с переносами строк и вписанными ссылками
 def superConcat(t):
     # print(str(len(t)) + " : " + t[0].text)
-    # data = html.tostring(t, method='html', encoding='cp1251')
-    # print (data.decode("cp1251"))
+    # data = html.tostring(t, method='html', encoding='cp1251').decode("cp1251")
+    # print(html.tostring(t, method='html', encoding='cp1251').decode("cp1251"))
     result = ""
     l = 0
     for s in t:
@@ -74,6 +74,9 @@ def getQuestionList(url, idn):
             question_time = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n.*", "", q[0].getchildren()[1].getchildren()[
                 2].text_content()).lstrip()).rstrip()
             expert = q[1].getchildren()[1].getchildren()[1].text_content().lstrip().rstrip()
+            expert_url = ""
+            expert_info = ""
+            answer_time = ""
             idn += 1
             # qua.write("\tВопрос:\n"+question+"\n\n")
             # qua.write("\tОтвет:\n"+answer+"\n\n")
@@ -83,6 +86,9 @@ def getQuestionList(url, idn):
             # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
             # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
             # qua.write("\tЭксперт:\n"+expert+"\n\n")
+            # qua.write("\Ссылка на эксперта:\n"+expert_url+"\n\n")
+            # qua.write("\Инфо об эксперте:\n"+expert_info+"\n\n")
+            # qua.write("\Время ответа:\n"+answer_time+"\n\n")
             # qua.write("\n------------------------------\n")
 
             # try:
@@ -94,7 +100,9 @@ def getQuestionList(url, idn):
                            'question_url': "http://www.banki.ru" + question_url, 'user_name': user,
                            'user_url': "http://www.banki.ru" + user_url,
                            'user_town': user_town, 'question_datetime': question_time,
-                           'expert_name': expert, 'acces_date': str(datetime.now()), 'site': "http://www.banki.ru/"})
+                           'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                           'answer_time': answer_time, 'acces_date': str(datetime.now()),
+                           'site': "http://www.banki.ru/services/questions-answers/"})
             # , question.xpath('td/strong/text()[1]'))
             # ,"http://www.banki.ru"+topic.get('href')])
 

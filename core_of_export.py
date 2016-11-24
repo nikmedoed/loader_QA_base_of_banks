@@ -12,6 +12,9 @@ def hdr_write (f, qa):
     file.write('user_town' + " = " + str(qa['user_town']) + "\n")
     file.write('question_datetime' + " = " + str(qa['question_datetime']) + "\n")
     file.write('expert_name' + " = " + str(qa['expert_name']) + "\n")
+    file.write('expert_url' + " = " + str(qa['expert_url']) + "\n")
+    file.write('expert_info' + " = " + str(qa['expert_info']) + "\n")
+    file.write('answer_time' + " = " + str(qa['answer_time']) + "\n")
     file.write('acces_date' + " = " + str(qa['acces_date']) + "\n")
     file.write('question' + " = " + str(qa['question']).replace("\n", "\t") + "\n")
     file.write('answer' + " = " + str(qa['answer']).replace("С уважением,", "").rstrip().replace("\n", "\t")) # + "\n")
@@ -40,6 +43,9 @@ def hdr_write_a (f, qa):
     file.write('category' + " = " + str(qa['category']) + "\n")
     file.write('question_url' + " = " + str(qa['question_url']) + "\n")
     file.write('expert_name' + " = " + str(qa['expert_name']) + "\n")
+    file.write('expert_url' + " = " + str(qa['expert_url']) + "\n")
+    file.write('expert_info' + " = " + str(qa['expert_info']) + "\n")
+    file.write('answer_time' + " = " + str(qa['answer_time']) + "\n")
     file.write('acces_date' + " = " + str(qa['acces_date']) + "\n")
     file.write('answer' + " = " + str(qa['answer']).replace("С уважением,", "").rstrip().replace("\n", "\t")) # + "\n")
     file.close()
@@ -68,6 +74,12 @@ def htm_write (f, qa):
         qa['question_datetime']) + "</td></tr>\n")
     file.write("<tr><td " + style1column + " >expert_name</td><td " + style2column + " >" + str(
         qa['expert_name']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >expert_url</td><td " + style2column + " >" + str(
+        qa['expert_url']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >expert_info</td><td " + style2column + " >" + str(
+        qa['expert_info']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >answer_time</td><td " + style2column + " >" + str(
+        qa['answer_time']) + "</td></tr>\n")
     file.write("<tr><td " + style1column + " >acces_date</td><td " + style2column + " >" + str(
         qa['acces_date']) + "</td></tr>\n")
     file.write("</table></I></FONT>\n</NOMORPH>\n&nbsp\n<div>")
@@ -93,6 +105,12 @@ def htm_write_a (f, qa):
         qa['question_url']) + "\">" + str(qa['question_url']) + "</a></td></tr>\n")
     file.write("<tr><td " + style1column + " >expert_name</td><td " + style2column + " >" + str(
         qa['expert_name']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >expert_url</td><td " + style2column + " >" + str(
+        qa['expert_url']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >expert_info</td><td " + style2column + " >" + str(
+        qa['expert_info']) + "</td></tr>\n")
+    file.write("<tr><td " + style1column + " >answer_time</td><td " + style2column + " >" + str(
+        qa['answer_time']) + "</td></tr>\n")
     file.write("<tr><td " + style1column + " >acces_date</td><td " + style2column + " >" + str(
         qa['acces_date']) + "</td></tr>\n")
     file.write("</table></I></FONT>\n</NOMORPH>\n&nbsp\n<div>")
@@ -146,8 +164,9 @@ def export(t):
 # t = []
 
 t = banki.getQuestionList (['Банкротство банков', 'http://www.banki.ru/services/questions-answers/?id=4826772?p=0'], 100100000000)
-# t.extend(banki.getQAbankiru(1))
-# t.extend(cbr.getQAcbr(2))
+# export(banki.getQAbankiru(1))
+# export(cbr.getQAcbr(2))
+# export(getQAff(3))
 export(t)
 
 # t_file = open("ban.html", "w")
