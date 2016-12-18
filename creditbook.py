@@ -2,6 +2,8 @@ import urllib.request
 from lxml import html
 import re
 from datetime import datetime
+import core_of_export
+from multiprocessing import Process
 
 # from selenium import webdriver
 # from lxml import etree
@@ -108,13 +110,15 @@ def getQA(thm, url, idn):
     #     my_file.write(html.tostring(q[1], method='html', encoding='cp1251').decode('cp1251')+"\n\n\n\n")
     # except Exception:
     #     my_file.write("Exception\n\n\n\n")
-    result.append({'id': idn, 'category': thm, 'question': question, 'answer': answer,
+    # result.append\
+    QA = ({'id': idn, 'category': thm, 'question': question, 'answer': answer,
                    'question_url': "http://creditbook.ru/" + url, 'user_name': user,
                    'user_url': "http://www.banki.ru" + user_url,
                    'user_town': user_town, 'question_datetime': question_time,
                    'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
                    'answer_time': answer_time, 'acces_date': str(datetime.now()),
                    'site': "http://creditbook.ru/otvety/"})
+    Process(target=core_of_export.exportOne, args=(QA,)).start()
     # , question.xpath('td/strong/text()[1]'))
     # ,"http://www.banki.ru"+topic.get('href')])
 

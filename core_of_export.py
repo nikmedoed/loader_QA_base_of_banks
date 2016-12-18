@@ -1,14 +1,14 @@
-import banki
-import cbr
-import ff
-import creditbook
-import asv
+# import banki
+# import cbr
+# import ff
+# import creditbook
+# import asv
 from multiprocessing import Process
 from threading import Thread
 
 def hdr_write (place, f, qa):
     file = open(place + "qa"+ f + ".hdr", "w")
-    file.write('MRM_id' + " = " + str(qa['id'] % 100000000*2 + qa['id']) + "\n")
+    file.write('MRM_id' + " = " + str((qa['id'] % 100000000)*2 + qa['id']) + "\n")
     file.write('MRM_QA_id' + " = " + str(qa['id']) + "\n")
     file.write('MRM_doc' + " = qa" + str(qa['id']) + "\n")
     file.write('MRM_type' + " = QA\n")
@@ -178,18 +178,21 @@ placeq = "ExportedFiles/questions/"
 placea = "ExportedFiles/answers/"
 placeqa = "ExportedFiles/"
 
+def exportOne(QA):
+    file = str(QA['id'])
+    file = ("0" * (13 - len(file))) + file
+    hdr_write(placeqa, file, QA)
+    hdr_write_a(placea, file, QA)
+    hdr_write_q(placeq, file, QA)
+    htm_write(placeqa, file, QA)
+    htm_write_a(placea, file, QA)
+    htm_write_q(placeq, file, QA)
 
 def export(t):
-    print("export:", t)
+    print("export All: ", t)
     for QA in t:
-        file = str(QA['id'])
-        file = ("0"*(13-len(file))) + file
-        hdr_write(placeqa, file, list(QA))
-        hdr_write_a(placea, file, list(QA))
-        hdr_write_q(placeq, file, list(QA))
-        htm_write(placeqa, file, list(QA))
-        htm_write_a(placea, file, list(QA))
-        htm_write_q(placeq, file, list(QA))
+        Process(target=exportOne, args=(QA,)).start()
+
 
 # t = []
 
@@ -205,9 +208,15 @@ def export(t):
 # t_file.close()
 # print(t)
 
+
+# banki.getQAbankiru(1)
+# cbr.getQAcbr(2)
+# ff.getQAff(3)
+# creditbook.getQAcreditbook(4)
+
 # Thread(target=export(banki.getQAbankiru(1))).start()
 # Thread(target=export(cbr.getQAcbr(2))).start()
-Thread(target=export(ff.getQAff(3))).start()
+# Thread(target=export(ff.getQAff(3))).start()
 # Thread(target=export(creditbook.getQAcreditbook(4))).start()
 
 # p1.start()
@@ -217,5 +226,7 @@ Thread(target=export(ff.getQAff(3))).start()
 # p1.join()
 # p2.join()
 # p3.join()
+
+
 
 

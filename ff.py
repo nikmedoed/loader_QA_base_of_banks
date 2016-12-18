@@ -2,9 +2,11 @@ import requests
 from lxml import html
 import re
 from datetime import datetime
+from multiprocessing import Process
 import urllib.request
 # from selenium import webdriver
 # from lxml import etree
+import core_of_export
 
 
 def getSubListOfthemes(m, n, ou):
@@ -97,51 +99,55 @@ def getQuestion(url):
     print("Обрабатывается страница", url, idn)
     requests.packages.urllib3.disable_warnings()
     data = requests.api.request('post', url[1], data={'bar':'baz'}, json=None, verify=False).text
-    q = html.document_fromstring(data).find_class('question')[0]
-    qs = q.getchildren()
-    a = html.document_fromstring(data).find_class('answer')[0].getchildren()
-    result = []
-    # qua = open("bane.html", "a")
+    try:
+        q = html.document_fromstring(data).find_class('question')[0]
+        qs = q.getchildren()
+        a = html.document_fromstring(data).find_class('answer')[0].getchildren()
+        result = []
+        # qua = open("bane.html", "a")
 
-    # print(html.tostring(qu, method='html', encoding='cp1251').decode("cp1251"))
-    # print(html.tostring(q[2], method='html', encoding='cp1251').decode("cp1251"))
+        # print(html.tostring(qu, method='html', encoding='cp1251').decode("cp1251"))
+        # print(html.tostring(q[2], method='html', encoding='cp1251').decode("cp1251"))
 
-    question = qs[0].text_content().replace("Вопрос:","") + "\n" + qs[1].text_content()
-    answer = a[1].getchildren()[0].getchildren()[1].text_content()
-    question_url = url[1]
-    user = "недоступно"
-    user_url = ""
-    ut = q.cssselect('time')[0].text
-    if  len(ut) == 10:
-        user_town = ""
-    else:
-        user_town = re.sub(".*\..*\..*\s", "", ut)
-    question_time = re.sub("\+.*", "", q.cssselect('meta')[0].get('content').replace("T", " "))
-    expert = a[1].getchildren()[0].getchildren()[0].getchildren()[0].text
-    expert_url = a[1].getchildren()[0].getchildren()[0].getchildren()[0].get("href")
-    expert_info = a[1].getchildren()[0].getchildren()[0].getchildren()[1].text_content()
-    answer_time = re.sub("\+.*", "", a[3].getchildren()[1].text)
-    # idn += 1
+        question = qs[0].text_content().replace("Вопрос:","") + "\n" + qs[1].text_content()
+        answer = a[1].getchildren()[0].getchildren()[1].text_content()
+        question_url = url[1]
+        user = "недоступно"
+        user_url = ""
+        ut = q.cssselect('time')[0].text
+        if  len(ut) == 10:
+            user_town = ""
+        else:
+            user_town = re.sub(".*\..*\..*\s", "", ut)
+        question_time = re.sub("\+.*", "", q.cssselect('meta')[0].get('content').replace("T", " "))
+        expert = a[1].getchildren()[0].getchildren()[0].getchildren()[0].text
+        expert_url = a[1].getchildren()[0].getchildren()[0].getchildren()[0].get("href")
+        expert_info = a[1].getchildren()[0].getchildren()[0].getchildren()[1].text_content()
+        answer_time = re.sub("\+.*", "", a[3].getchildren()[1].text)
+        # idn += 1
 
-    # qua.write("\tВопрос:\n"+question+"\n\n")
-    # qua.write("\tОтвет:\n"+answer+"\n\n")
-    # qua.write("\tПользователь:\n"+user+"\n\n")
-    # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
-    # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
-    # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
-    # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
-    # qua.write("\tЭксперт:\n"+expert+"\n\n")
-    # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
-    # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
-    # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
-    # qua.write("\n------------------------------\n")
+        # qua.write("\tВопрос:\n"+question+"\n\n")
+        # qua.write("\tОтвет:\n"+answer+"\n\n")
+        # qua.write("\tПользователь:\n"+user+"\n\n")
+        # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
+        # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
+        # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
+        # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
+        # qua.write("\tЭксперт:\n"+expert+"\n\n")
+        # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
+        # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
+        # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
+        # qua.write("\n------------------------------\n")
 
-    result.append({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
-                   'question_url': question_url, 'user_name': user, 'user_url':  user_url,
-                   'user_town': user_town, 'question_datetime': question_time,
-                   'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
-                   'answer_time': answer_time, 'acces_date': str(datetime.now()), 'site': "https://ff.ru/ask/"})
-
+        # result.append \
+        QA = ({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
+                       'question_url': question_url, 'user_name': user, 'user_url':  user_url,
+                       'user_town': user_town, 'question_datetime': question_time,
+                       'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                       'answer_time': answer_time, 'acces_date': str(datetime.now()), 'site': "https://ff.ru/ask/"})
+        Process(target=core_of_export.exportOne, args=(QA,)).start()
+    except Exception as ex:
+        print("ff.ru ошибос:", ex)
 
     # qua.close()
     return result
@@ -183,4 +189,4 @@ def getQAff(n):
 # print(banki_ru_base)
 #
 
-getQAff(3)
+# getQAff(3)

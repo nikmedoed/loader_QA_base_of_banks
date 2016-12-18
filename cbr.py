@@ -2,7 +2,8 @@ import urllib.request
 from lxml import html
 import re
 from datetime import datetime
-
+import core_of_export
+from multiprocessing import Process
 # from selenium import webdriver
 # from lxml import etree
 
@@ -43,31 +44,35 @@ def getQuestionList(url, idn):
     data = u.read()
     h = html.document_fromstring(data).find_class('question')
     result = []
+    try:
+        for qu in h:
+            q = qu.getchildren()
+            # print(html.tostring(qu, method='html', encoding='cp1251').decode("cp1251"))
+            # print(html.tostring(q[2], method='html', encoding='cp1251').decode("cp1251"))
+            question = q[1].text_content()
+            answer = superConcat(q[2])
+            question_url = url[1] + q[1].get('href')
+            user = "недоступно"
+            user_url = ""
+            user_town = ""
+            question_time = "actual"
+            expert = "ЦБ РФ"
+            expert_url = ""
+            expert_info = ""
+            answer_time = ""
+            idn += 1
 
-    for qu in h:
-        q = qu.getchildren()
-        # print(html.tostring(qu, method='html', encoding='cp1251').decode("cp1251"))
-        # print(html.tostring(q[2], method='html', encoding='cp1251').decode("cp1251"))
-        question = q[1].text_content()
-        answer = superConcat(q[2])
-        question_url = url[1] + q[1].get('href')
-        user = "недоступно"
-        user_url = ""
-        user_town = ""
-        question_time = "actual"
-        expert = "ЦБ РФ"
-        expert_url = ""
-        expert_info = ""
-        answer_time = ""
-        idn += 1
+            # result.append \
+            QA = ({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
+                           'question_url': question_url, 'user_name': user, 'user_url':  user_url,
+                           'user_town': user_town, 'question_datetime': question_time,
+                           'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                           'answer_time': answer_time,'acces_date': str(datetime.now()),
+                           'site': "http://www.cbr.ru/Reception/Faq/"})
 
-        result.append({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
-                       'question_url': question_url, 'user_name': user, 'user_url':  user_url,
-                       'user_town': user_town, 'question_datetime': question_time,
-                       'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
-                       'answer_time': answer_time,'acces_date': str(datetime.now()),
-                       'site': "http://www.cbr.ru/Reception/Faq/"})
-
+            Process(target=core_of_export.exportOne, args=(QA,)).start()
+    except Exception as ex:
+        print("cbr.ru ошибос:", ex)
     return result
 
 

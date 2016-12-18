@@ -2,6 +2,8 @@ import urllib.request
 from lxml import html
 import re
 from datetime import datetime
+import core_of_export
+from multiprocessing import Process
 
 # from selenium import webdriver
 # from lxml import etree
@@ -49,11 +51,17 @@ def superConcat(t):
     # print (result+"\n---------------------------------------\n")
     return result
 
+def test(s):
+    if s is None:
+        return "???"
+    else:
+        return s
+
 
 # из очередной страницы вопросов выделяем все вопросы с ответами
 def getQuestionList(url, idn):
     u = urllib.request.urlopen(url[1])
-    print("Обрабатывается страница", url, idn)
+    # print("Обрабатывается страница", url, idn)
     data = u.read()
     h = html.document_fromstring(data)
     result = []
@@ -61,54 +69,63 @@ def getQuestionList(url, idn):
     # qua = open("bane.html", "a")
 
     for qu in h.find_class('qaBlock'):
-        q = qu.getchildren()
-        # print(html.tostring(qu.getchildren()[0], method='html', encoding='cp1251').decode("cp1251"))
-        if len(q) > 1:  # если есть ответы
-            question = superConcat(q[0].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
-            answer = superConcat(q[1].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
-            question_url = q[0].getchildren()[1].getchildren()[1].getchildren()[0].get('href')
-            user = q[0].getchildren()[1].getchildren()[2].getchildren()[0].text.lstrip().rstrip()
-            user_url = q[0].getchildren()[1].getchildren()[2].getchildren()[0].get('href')
-            user_town = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n", "", q[0].getchildren()[1].getchildren()[
-                2].text_content()).replace("(","").replace(")","").lstrip()).rstrip()
-            question_time = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n.*", "", q[0].getchildren()[1].getchildren()[
-                2].text_content()).lstrip()).rstrip()
-            expert = q[1].getchildren()[1].getchildren()[1].text_content().lstrip().rstrip()
-            expert_url = ""
-            expert_info = ""
-            answer_time = ""
-            idn += 1
-            # qua.write("\tВопрос:\n"+question+"\n\n")
-            # qua.write("\tОтвет:\n"+answer+"\n\n")
-            # qua.write("\tПользователь:\n"+user+"\n\n")
-            # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
-            # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
-            # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
-            # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
-            # qua.write("\tЭксперт:\n"+expert+"\n\n")
-            # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
-            # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
-            # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
-            # qua.write("\n------------------------------\n")
+        try:
+            q = qu.getchildren()
+            # print(html.tostring(qu.getchildren()[0], method='html', encoding='cp1251').decode("cp1251"))
+            if len(q) > 1:  # если есть ответы
+                question = superConcat(q[0].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
+                answer = superConcat(q[1].getchildren()[1].getchildren()[0]).replace("\xa0"," ")
+                question_url = q[0].getchildren()[1].getchildren()[1].getchildren()[0].get('href')
+                user =' '.join( q[0].getchildren()[1].getchildren()[2].text.strip().split())
+                user_url = q[0].getchildren()[1].getchildren()[2].getchildren()[0].get('href')
+                user_town = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n", "", q[0].getchildren()[1].getchildren()[
+                    2].text_content()).replace("(","").replace(")","").strip()).strip()
+                question_time = re.sub("\n.*", "", re.sub(".*\n.*\n.*\n.*", "", q[0].getchildren()[1].getchildren()[
+                    2].text_content()).lstrip()).rstrip()
+                try:
+                    expert = q[1].getchildren()[1].getchildren()[1].text_content().strip()
+                except:
+                    expert = ""
+                expert_url = ""
+                expert_info = ""
+                answer_time = ""
+                idn += 1
+                # qua.write("\tВопрос:\n"+question+"\n\n")
+                # qua.write("\tОтвет:\n"+answer+"\n\n")
+                # qua.write("\tПользователь:\n"+user+"\n\n")
+                # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
+                # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
+                # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
+                # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
+                # qua.write("\tЭксперт:\n"+expert+"\n\n")
+                # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
+                # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
+                # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
+                # qua.write("\n------------------------------\n")
 
-            # try:
-            #     my_file.write(html.tostring(q[0], method='html', encoding='cp1251').decode('cp1251')+"\n")
-            #     my_file.write(html.tostring(q[1], method='html', encoding='cp1251').decode('cp1251')+"\n\n\n\n")
-            # except Exception:
-            #     my_file.write("Exception\n\n\n\n")
-            result.append({'id': idn, 'category': url[0], 'question': question, 'answer': answer,
-                           'question_url': "http://www.banki.ru" + question_url, 'user_name': user,
-                           'user_url': "http://www.banki.ru" + user_url,
-                           'user_town': user_town, 'question_datetime': question_time,
-                           'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
-                           'answer_time': answer_time, 'acces_date': str(datetime.now()),
-                           'site': "http://www.banki.ru/services/questions-answers/"})
-            # , question.xpath('td/strong/text()[1]'))
-            # ,"http://www.banki.ru"+topic.get('href')])
+                # try:
+                #     my_file.write(html.tostring(q[0], method='html', encoding='cp1251').decode('cp1251')+"\n")
+                #     my_file.write(html.tostring(q[1], method='html', encoding='cp1251').decode('cp1251')+"\n\n\n\n")
+                # except Exception:
+                #     my_file.write("Exception\n\n\n\n")
+                # result.append \
+                QA = {'id': idn, 'category': url[0], 'question': question, 'answer': answer,
+                               'question_url': "http://www.banki.ru" + question_url, 'user_name': user,
+                               'user_url': "http://www.banki.ru" + test(user_url),
+                               'user_town': user_town, 'question_datetime': question_time,
+                               'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                               'answer_time': answer_time, 'acces_date': str(datetime.now()),
+                               'site': "http://www.banki.ru/services/questions-answers/"}
+                Process(target=core_of_export.exportOne, args=(QA,)).start()
+                # , question.xpath('td/strong/text()[1]'))
+                # ,"http://www.banki.ru"+topic.get('href')])
+        except Exception as ex:
+            print("банки ру ошибос:", ex, url , user_url)
 
+        print("банки ру - страница обработана:", url, idn)
     # my_file.close()
     # qua.close()
-    return result
+    return idn
 
 
 # получив ссылку на раздел, узнаем сколько в нем страниц и по очреди просматриваем их, собирая базу вопрос-ответ
@@ -141,8 +158,8 @@ def QAdriver(u, nnn):
 
         for n in range(l):
             re = getQuestionList([u[0], u[1] + "?p=" + str(n)], nnn)
-            nnn = re[len(re) - 1]['id']
-            result.extend(re)
+            nnn = re #[len(re) - 1]['id']
+            # result.extend(re)
     except Exception as ex:
         print("банки ру ошибос:", ex)
         # if k:
@@ -181,6 +198,14 @@ def getQAbankiru(n):
     banki_ru_base = []
     for tL in topicList:
         n += 100000000
-        banki_ru_base.extend(QAdriver(tL, n))
-    print("банки.ру - возврашена база")
+        # QAdriver(tL, n)
+        Process(target=QAdriver, args=(tL, n)).start()
+    print("банки.ру - паралельная выгрузка пошла")
     return banki_ru_base
+
+def main():
+    getQAbankiru(1)
+
+if __name__ == '__main__':
+    # multiprocessing.freeze_support()
+    main()
