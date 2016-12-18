@@ -203,7 +203,7 @@ def getQAff(n):
     # for l in map(getQuestionList, topicList):
     #     for el in l:
     #         banki_ru_base.append(getQuestion(el))
-    for k in list(map(lambda x: list(map(getQuestion, x)), map(getQuestionList, topicList))):
+    for k in list(map(lambda x: map(getQuestion, x), map(getQuestionList, topicList))):
         banki_ru_base.extend(k)
     print("ФедФин бюро - возврашена база")
     return banki_ru_base
