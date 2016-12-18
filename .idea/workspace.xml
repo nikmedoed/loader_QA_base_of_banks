@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22b3de58-82e7-46ee-910f-1bf176915014" name="Default" comment="|">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bane.html" afterPath="$PROJECT_DIR$/bane.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/banki.py" afterPath="$PROJECT_DIR$/banki.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core_of_export.py" afterPath="$PROJECT_DIR$/core_of_export.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/creditbook.py" afterPath="$PROJECT_DIR$/creditbook.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ff.py" afterPath="$PROJECT_DIR$/ff.py" />
     </list>
     <ignored path="import pages.iws" />
@@ -19,6 +21,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/loader_QA_base_of_banks$core_of_export.coverage" NAME="core_of_export Coverage Results" MODIFIED="1482020341842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/import pages$core_of_export.coverage" NAME="core_of_export Coverage Results" MODIFIED="1479790387880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/loader_QA_base_of_banks$creditbook.coverage" NAME="creditbook Coverage Results" MODIFIED="1482035308650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/import pages$banki__1_.coverage" NAME="banki (1) Coverage Results" MODIFIED="1479788547388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/import pages$test.coverage" NAME="test Coverage Results" MODIFIED="1479078889650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/loader_QA_base_of_banks$ff.coverage" NAME="ff Coverage Results" MODIFIED="1479969804724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -39,8 +42,8 @@
       <file leaf-file-name="banki.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/banki.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1501">
-              <caret line="170" column="35" lean-forward="true" selection-start-line="170" selection-start-column="35" selection-end-line="170" selection-end-column="35" />
+            <state relative-caret-position="181">
+              <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -64,25 +67,13 @@
       <file leaf-file-name="ff.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="205" column="51" lean-forward="false" selection-start-line="205" selection-start-column="51" selection-end-line="205" selection-end-column="51" />
+            <state relative-caret-position="215">
+              <caret line="121" column="74" lean-forward="true" selection-start-line="121" selection-start-column="74" selection-end-line="121" selection-end-column="88" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <element signature="e#930#1075#0" expanded="false" />
                 <element signature="e#1950#1980#0" expanded="false" />
-                <element signature="e#7809#7836#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="core_of_export.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core_of_export.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="199" column="11" lean-forward="true" selection-start-line="199" selection-start-column="11" selection-end-line="199" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#6353#6380#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,25 +82,30 @@
       <file leaf-file-name="creditbook.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/creditbook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="805">
+              <caret line="172" column="15" lean-forward="false" selection-start-line="172" selection-start-column="15" selection-end-line="172" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#225#1207#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core_of_export.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core_of_export.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-527">
+              <caret line="146" column="25" lean-forward="false" selection-start-line="146" selection-start-column="25" selection-end-line="146" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="asv.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gosvoenipoteka.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gosvoenipoteka.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -132,10 +128,11 @@
       <find>re</find>
       <find>re.</find>
       <find>id</find>
-      <find>QAdriver</find>
       <find>nnn</find>
-      <find>idn</find>
       <find>getQuestionList</find>
+      <find>QAdriver</find>
+      <find>idn</find>
+      <find>export</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,12 +149,12 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/test2.py" />
         <option value="$PROJECT_DIR$/gosvoenipoteka.py" />
-        <option value="$PROJECT_DIR$/creditbook.py" />
         <option value="$PROJECT_DIR$/asv.py" />
-        <option value="$PROJECT_DIR$/banki.py" />
         <option value="$PROJECT_DIR$/cbr.py" />
         <option value="$PROJECT_DIR$/../../../programming/Parallels/Task2/Muromtsev-624-V12/make_graphic.py" />
         <option value="$PROJECT_DIR$/ff.py" />
+        <option value="$PROJECT_DIR$/banki.py" />
+        <option value="$PROJECT_DIR$/creditbook.py" />
         <option value="$PROJECT_DIR$/core_of_export.py" />
       </list>
     </option>
@@ -170,7 +167,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="974" />
+    <option name="width" value="1010" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -198,25 +195,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
-  <component name="RunManager" selected="Python.core_of_export">
-    <configuration default="false" name="banki (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="import pages" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/banki.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.creditbook">
     <configuration default="false" name="core_of_export" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -285,6 +264,24 @@
       <module name="import pages" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../../programming/Parallels/Task2/Muromtsev-624-V12/make_graphic.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="creditbook" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="import pages" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/creditbook.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -504,19 +501,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.banki (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python.core_of_export" />
-      <item index="2" class="java.lang.String" itemvalue="Python.cbr" />
-      <item index="3" class="java.lang.String" itemvalue="Python.ff" />
-      <item index="4" class="java.lang.String" itemvalue="Python.make_graphic" />
+      <item index="0" class="java.lang.String" itemvalue="Python.core_of_export" />
+      <item index="1" class="java.lang.String" itemvalue="Python.cbr" />
+      <item index="2" class="java.lang.String" itemvalue="Python.ff" />
+      <item index="3" class="java.lang.String" itemvalue="Python.make_graphic" />
+      <item index="4" class="java.lang.String" itemvalue="Python.creditbook" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.core_of_export" />
-        <item index="1" class="java.lang.String" itemvalue="Python.make_graphic" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ff" />
-        <item index="3" class="java.lang.String" itemvalue="Python.cbr" />
-        <item index="4" class="java.lang.String" itemvalue="Python.banki (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.creditbook" />
+        <item index="1" class="java.lang.String" itemvalue="Python.core_of_export" />
+        <item index="2" class="java.lang.String" itemvalue="Python.make_graphic" />
+        <item index="3" class="java.lang.String" itemvalue="Python.ff" />
+        <item index="4" class="java.lang.String" itemvalue="Python.cbr" />
       </list>
     </recent_temporary>
   </component>
@@ -537,7 +534,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="1010" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24425887" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -546,7 +543,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -766,14 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gosvoenipoteka.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -785,21 +774,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/banki.py">
+    <entry file="file://$PROJECT_DIR$/ff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1501">
-          <caret line="170" column="35" lean-forward="true" selection-start-line="170" selection-start-column="35" selection-end-line="170" selection-end-column="35" />
+        <state relative-caret-position="215">
+          <caret line="121" column="74" lean-forward="true" selection-start-line="121" selection-start-column="74" selection-end-line="121" selection-end-column="88" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#930#1075#0" expanded="false" />
+            <element signature="e#1950#1980#0" expanded="false" />
+            <element signature="e#6353#6380#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/creditbook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -811,23 +795,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ff.py">
+    <entry file="file://$PROJECT_DIR$/gosvoenipoteka.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="205" column="51" lean-forward="false" selection-start-line="205" selection-start-column="51" selection-end-line="205" selection-end-column="51" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/banki.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#930#1075#0" expanded="false" />
-            <element signature="e#1950#1980#0" expanded="false" />
-            <element signature="e#7809#7836#0" expanded="false" />
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/creditbook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="172" column="15" lean-forward="false" selection-start-line="172" selection-start-column="15" selection-end-line="172" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#225#1207#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core_of_export.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="199" column="11" lean-forward="true" selection-start-line="199" selection-start-column="11" selection-end-line="199" selection-end-column="11" />
+        <state relative-caret-position="-527">
+          <caret line="146" column="25" lean-forward="false" selection-start-line="146" selection-start-column="25" selection-end-line="146" selection-end-column="25" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

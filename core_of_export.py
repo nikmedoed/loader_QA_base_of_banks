@@ -7,7 +7,7 @@ from multiprocessing import Process
 from threading import Thread
 
 def hdr_write (place, f, qa):
-    file = open("ExportedFiles/qa"+ f + ".hdr", "w")
+    file = open(place + "qa"+ f + ".hdr", "w")
     file.write('MRM_id' + " = " + str(qa['id'] % 100000000*2 + qa['id']) + "\n")
     file.write('MRM_QA_id' + " = " + str(qa['id']) + "\n")
     file.write('MRM_doc' + " = qa" + str(qa['id']) + "\n")
@@ -30,8 +30,8 @@ def hdr_write (place, f, qa):
     file.close()
 
 
-def hdr_write_q (f, qa):
-    file = open("ExportedFiles/questions/q" + f + ".hdr", "w")
+def hdr_write_q (place, f, qa):
+    file = open(place + "q" + f + ".hdr", "w")
     file.write('MRM_id' + " = " + str(qa['id'] % 100000000*2 - 1 + qa['id']) + "\n")
     file.write('MRM_QA_id' + " = " + str(qa['id']) + "\n")
     file.write('MRM_doc' + " = q" + str(qa['id']) + "\n")
@@ -50,8 +50,8 @@ def hdr_write_q (f, qa):
     file.close()
 
 
-def hdr_write_a (f, qa):
-    file = open("ExportedFiles/answers/a"+ f + ".hdr", "w")
+def hdr_write_a (place, f, qa):
+    file = open(place + "a"+ f + ".hdr", "w")
     file.write('MRM_id' + " = " + str(qa['id'] % 100000000*2 - 2 + qa['id']) + "\n")
     file.write('MRM_QA_id' + " = " + str(qa['id']) + "\n")
     file.write('MRM_doc' + " = a" + str(qa['id']) + "\n")
@@ -72,8 +72,8 @@ def hdr_write_a (f, qa):
     file.close()
 
 
-def htm_write (f, qa):
-    file = open("ExportedFiles/qa" + f + ".htm", "w")
+def htm_write (place, f, qa):
+    file = open(place + "qa" + f + ".htm", "w")
     style1column = "style=\"text-align: right;font-weight: bold\""
     style2column = ""
     styletable = "border=\"1\" style=\"color:gray\""
@@ -111,8 +111,8 @@ def htm_write (f, qa):
     file.close()
 
 
-def htm_write_a (f, qa):
-    file = open("ExportedFiles/answers/a" + f + ".htm", "w")
+def htm_write_a (place, f, qa):
+    file = open(place + "a" + f + ".htm", "w")
     style1column = "style=\"text-align: right;font-weight: bold\""
     style2column = ""
     styletable = "border=\"1\" style=\"color:gray\""
@@ -143,8 +143,8 @@ def htm_write_a (f, qa):
     file.close()
 
 
-def htm_write_q (f, qa):
-    file = open("ExportedFiles/questions/q" + f + ".htm", "w")
+def htm_write_q (place, f, qa):
+    file = open(place + "q" + f + ".htm", "w")
     style1column = "style=\"text-align: right;font-weight: bold\""
     style2column = ""
     styletable = "border=\"1\" style=\"color:gray\""
@@ -174,9 +174,9 @@ def htm_write_q (f, qa):
                "</p></i></FONT></NOMORPH>\n")
     file.close()
 
-placeq = ""
-placea = ""
-placeqa = ""
+placeq = "ExportedFiles/questions/"
+placea = "ExportedFiles/answers/"
+placeqa = "ExportedFiles/"
 
 
 def export(t):
@@ -208,6 +208,7 @@ def export(t):
 # Thread(target=export(banki.getQAbankiru(1))).start()
 # Thread(target=export(cbr.getQAcbr(2))).start()
 Thread(target=export(ff.getQAff(3))).start()
+# Thread(target=export(creditbook.getQAcreditbook(4))).start()
 
 # p1.start()
 # p2.start()

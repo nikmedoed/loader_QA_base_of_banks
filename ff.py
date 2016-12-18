@@ -148,43 +148,6 @@ def getQuestion(url):
 
 
 #TODO удаление повторяющихся вопросов
-# получив ссылку на раздел, узнаем сколько в нем страниц и по очреди просматриваем их, собирая базу вопрос-ответ
-def QAdriver(u, nnn):
-    # print(u)
-    result = []
-    # browser = webdriver.Chrome()
-    try:
-        # browser.get("http://www.banki.ru/services/questions-answers/?id=4826772&p=1")
-        # l = browser.find_element_by_class_name('v-margins').get_attribute("data-options")
-        # print(eval(l))
-        # #print (browser.page_source)
-        # h = html.document_fromstring(browser.page_source)
-        # browser.close()
-        # k = 0
-        # print(html.tostring(h, method='html', encoding='cp1251').decode("cp1251"))
-
-        h = html.document_fromstring(urllib.request.urlopen(u[1]).read())
-        l = h.find_class('v-margins')[0].get('data-options')
-        if l is None:
-            l = 1
-        else:
-            l = l.split('; ')
-            l = round(float(l[2].split(': ')[1]) / float(l[1].split(': ')[1]) + 0.5)
-        print(u[0], u[1], "Страниц:", l)
-        # print(l)
-        # print(html.tostring(l, method='html', encoding='cp1251').decode("cp1251"))
-        # l = l[len(l)-2].getchildren()[0].text
-        # print (l)
-
-        for n in range(l):
-            re = getQuestionList([u[0], u[1] + "?p=" + str(n)], nnn)
-            nnn = re[len(re) - 1]['id']
-            result.extend(re)
-    except Exception as ex:
-        print("банки ру ошибос:", ex)
-        # if k:
-        #     browser.close()
-    return result
 
 
 #TODO параллельная загрузка
@@ -203,7 +166,7 @@ def getQAff(n):
     # for l in map(getQuestionList, topicList):
     #     for el in l:
     #         banki_ru_base.append(getQuestion(el))
-    for k in list(map(lambda x: map(getQuestion, x), map(getQuestionList, topicList))):
+    for k in list(map(lambda x: list(map(getQuestion, x)), map(getQuestionList, topicList))):
         banki_ru_base.extend(k)
     print("ФедФин бюро - возврашена база")
     return banki_ru_base

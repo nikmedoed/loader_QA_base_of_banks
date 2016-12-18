@@ -86,9 +86,9 @@ def getQuestionList(url, idn):
             # qua.write("\tПостоянный адрес:\n"+question_url+"\n\n")
             # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
             # qua.write("\tЭксперт:\n"+expert+"\n\n")
-            # qua.write("\Ссылка на эксперта:\n"+expert_url+"\n\n")
-            # qua.write("\Инфо об эксперте:\n"+expert_info+"\n\n")
-            # qua.write("\Время ответа:\n"+answer_time+"\n\n")
+            # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
+            # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
+            # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
             # qua.write("\n------------------------------\n")
 
             # try:
