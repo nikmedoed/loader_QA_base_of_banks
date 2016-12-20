@@ -174,12 +174,15 @@ def htm_write_q (place, f, qa):
                "</p></i></FONT></NOMORPH>\n")
     file.close()
 
-placeq = "ExportedFiles/questions/"
-placea = "ExportedFiles/answers/"
-placeqa = "ExportedFiles/"
+#
+# placeqa = "ExportedFiles/"
+# placeq = placeqa + "questions/"
+# placea = placeqa + "answers/"
 
-def exportOne(QA):
+def exportOne(QA, placeqa = "ExportedFiles/"):
     file = str(QA['id'])
+    placeq = placeqa + "questions/"
+    placea = placeqa + "answers/"
     file = ("0" * (13 - len(file))) + file
     hdr_write(placeqa, file, QA)
     hdr_write_a(placea, file, QA)
@@ -188,10 +191,10 @@ def exportOne(QA):
     htm_write_a(placea, file, QA)
     htm_write_q(placeq, file, QA)
 
-def export(t):
+def export(t,placeqa = "ExportedFiles/"):
     print("export All: ", t)
     for QA in t:
-        Process(target=exportOne, args=(QA,)).start()
+        Process(target=exportOne, args=(QA,placeqa)).start()
 
 
 # t = []

@@ -116,13 +116,14 @@ def getQuestionList(url, idn):
                                'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
                                'answer_time': answer_time, 'acces_date': str(datetime.now()),
                                'site': "http://www.banki.ru/services/questions-answers/"}
-                Process(target=core_of_export.exportOne, args=(QA,)).start()
+                # Process(target=core_of_export.exportOne, args=(QA,ourway)).start() -------------для параллельной записи. Тормозит--------------
+                core_of_export.exportOne(QA,ourway)
                 # , question.xpath('td/strong/text()[1]'))
                 # ,"http://www.banki.ru"+topic.get('href')])
         except Exception as ex:
             print("банки ру ошибос:", ex, url , user_url)
 
-        print("банки ру - страница обработана:", url, idn)
+        # print("банки ру - страница обработана:", url, idn)
     # my_file.close()
     # qua.close()
     return idn
@@ -164,6 +165,7 @@ def QAdriver(u, nnn):
         print("банки ру ошибос:", ex)
         # if k:
         #     browser.close()
+    print("банки ру - обработано:", u, nnn)
     return result
 
 
@@ -176,7 +178,7 @@ my_file.close()
 topicList = [["БАНКРОТСТВО БАНКОВ", "http://www.banki.ru/services/questions-answers/?id=4826772"]]
 '''
 
-#TODO параллельная загрузка
+
 # возвращает список словарей - ответов. получает номер сайта для формирвоания ID вопроса-ответа в формате:
 # 2 символна на сайт,
 # 3 символа на раздел,
@@ -202,6 +204,10 @@ def getQAbankiru(n):
         Process(target=QAdriver, args=(tL, n)).start()
     print("банки.ру - паралельная выгрузка пошла")
     return banki_ru_base
+
+
+ourway = "E:/clouds/MailCloud/ExportedFiles_banki/"
+
 
 def main():
     getQAbankiru(1)

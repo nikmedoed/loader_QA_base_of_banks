@@ -70,13 +70,13 @@ def getQuestionList(url, idn):
                            'answer_time': answer_time,'acces_date': str(datetime.now()),
                            'site': "http://www.cbr.ru/Reception/Faq/"})
 
-            Process(target=core_of_export.exportOne, args=(QA,)).start()
+            # Process(target=core_of_export.exportOne, args=(QA,)).start() # ----- параллельная запись, аккуратнее
+            core_of_export.exportOne(QA)
     except Exception as ex:
         print("cbr.ru ошибос:", ex)
     return result
 
 
-#TODO параллельная загрузка
 # возвращает список словарей - ответов. получает номер сайта для формирвоания ID вопроса-ответа в формате:
 # 2 символна на сайт,
 # 3 символа на раздел,
@@ -84,12 +84,20 @@ def getQuestionList(url, idn):
 def getQAcbr(n):
     topicList = getListOfthemes()
     n *= 100000000000
-    # print(topicList)
+    print(topicList)
     print("ЦБ РФ - получен спискок тем / старт парсинга")
     # topicList = [topicList[0]]
     banki_ru_base = []
     for tL in topicList:
         n += 100000000
-        banki_ru_base.extend(getQuestionList(tL, n))
-    print("ЦБ РФ - возврашена база")
+        Process(target=getQuestionList, args=(tL, n)).start()
+        # banki_ru_base.extend(getQuestionList(tL, n))
+    print("ЦБ РФ - пошла параллельная загрузка")
     return banki_ru_base
+
+def main():
+    getQAcbr(2)
+
+if __name__ == '__main__':
+    # multiprocessing.freeze_support()
+    main()

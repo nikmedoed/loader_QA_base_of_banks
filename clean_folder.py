@@ -2,21 +2,26 @@ import os
 import core_of_export
 
 
-def clean_folders():
-    print( os.listdir(core_of_export.placeq))
-    for i in os.listdir(core_of_export.placeq):
-        os.remove(core_of_export.placeq+i)
-    print( os.listdir(core_of_export.placea))
-    for i in os.listdir(core_of_export.placea):
-        os.remove(core_of_export.placea+i)
-    print( os.listdir(core_of_export.placeqa))
+def clean_folders(qa= "ExportedFiles/"):
+    a = qa + "answers/"
+    q = qa + "questions/"
+    # print( os.listdir(q))
+    for i in os.listdir(q):
+        os.remove(q+i)
+        print(q+i)
+    # print( os.listdir(a))
+    for i in os.listdir(a):
+        os.remove(a+i)
+    # print( os.listdir(qa))
 
-    for i in os.listdir(core_of_export.placeqa):
+    for i in os.listdir(qa):
         try:
-            os.remove(core_of_export.placeqa+i)
+            os.remove(qa+i)
         except:
             None
 
 
 if __name__ == '__main__':
-    clean_folders()
+    # clean_folders("E:/clouds/MailCloud/ExportedFiles_ff/")
+    clean_folders("E:\clouds\MailCloud\ExportedFiles_Banks\ExportedFiles_banki/".replace("\\","/"))
+    # clean_folders("E:/clouds/MailCloud/ExportedFiles_banki/")

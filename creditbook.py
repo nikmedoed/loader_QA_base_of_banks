@@ -10,6 +10,9 @@ from multiprocessing import Process
 
 
 # получаем общий список разделов из главной страницы
+JNRB_DJGHJCF = "jib,rf j,hf,jnrb djghjcf"
+
+
 def getListOfthemes():
     start = [
         [0, "Кредиты", "http://creditbook.ru/otvety/kredity"],
@@ -31,7 +34,7 @@ def getListOfthemes():
         for s in h[topic[0]]:
             result.append([topic[1] + " / " + ' '.join(s.text_content().split()), "http://creditbook.ru" + s[0].get('href')])
 
-    print(result)
+    # print(result)
     # my_file.close()
     return result
 
@@ -71,59 +74,67 @@ def superConcat(t):
 
 # из очередной страницы вопросов выделяем все вопросы с ответами
 def getQA(thm, url, idn):
-    print("Обрабатывается страница", thm,url, idn)
-    q = html.document_fromstring(urllib.request.urlopen(url).read()).find_class("answer_all")[0]
+    # print("Обрабатывается страница", thm,url, idn)
     result = []
+
+    try:
+        state = "start"
+        q = html.document_fromstring(urllib.request.urlopen(url).read()).find_class("answer_all")[0]
 
     # my_file = open("bant.html", "w")
     # qua = open("bane.html", "w")
     # my_file.write(html.tostring(q, method='html', encoding='utf-8').decode('utf-8'))
     # print(html.tostring(qu.getchildren()[0], method='html', encoding='cp1251').decode("cp1251"))
+        question = q[1].text_content().strip()
+        # print(q[1].text_content())
+        answer = superConcat(q[2][1][1]).replace("\xa0"," ")
+        user = ""
+        user_url = ""
+        user_town = ""
+        question_time = q[0][1].text_content().strip()
+        expert = q[2][1][0][0][0].text_content().strip()
+        expert_url = ""
+        expert_info = q[2][1][0][0][1].text_content().strip()
+        state= "before time"
+        answer_time =  q[0][1].text_content().strip()
 
-    question = q[1].text_content().strip()
-    # print(q[1].text_content())
-    answer = superConcat(q[2][1][1]).replace("\xa0"," ")
-    user = ""
-    user_url = ""
-    user_town = ""
-    question_time = q[0][1].text_content().strip()
-    expert = q[2][1][0][0][0].text_content().strip()
-    expert_url = ""
-    expert_info = q[2][1][0][0][1].text_content().strip()
-    answer_time =  q[2][4].text_content().strip()
+        # qua.write("\tВопрос:\n"+question+"\n\n")
+        # qua.write("\tОтвет:\n"+answer+"\n\n")
+        # qua.write("\tПользователь:\n"+user+"\n\n")
+        # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
+        # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
+        # qua.write("\tПостоянный адрес:\n"+url+"\n\n")
+        # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
+        # qua.write("\tЭксперт:\n"+expert+"\n\n")
+        # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
+        # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
+        # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
+        # qua.write("\n------------------------------\n")
 
-    # qua.write("\tВопрос:\n"+question+"\n\n")
-    # qua.write("\tОтвет:\n"+answer+"\n\n")
-    # qua.write("\tПользователь:\n"+user+"\n\n")
-    # qua.write("\tСсылка на пользователя:\n"+user_url+"\n\n")
-    # qua.write("\tГород пользователя:\n"+user_town+"\n\n")
-    # qua.write("\tПостоянный адрес:\n"+url+"\n\n")
-    # qua.write("\tВремя вопроса:\n"+question_time+"\n\n")
-    # qua.write("\tЭксперт:\n"+expert+"\n\n")
-    # qua.write("\tСсылка на эксперта:\n"+expert_url+"\n\n")
-    # qua.write("\tИнфо об эксперте:\n"+expert_info+"\n\n")
-    # qua.write("\tВремя ответа:\n"+answer_time+"\n\n")
-    # qua.write("\n------------------------------\n")
+        # try:
+        #     my_file.write(html.tostring(q[0], method='html', encoding='cp1251').decode('cp1251')+"\n")
+        #     my_file.write(html.tostring(q[1], method='html', encoding='cp1251').decode('cp1251')+"\n\n\n\n")
+        # except Exception:
+        #     my_file.write("Exception\n\n\n\n")
+        # result.append\
+        QA = ({'id': idn, 'category': thm, 'question': question, 'answer': answer,
+                       'question_url': "http://creditbook.ru/" + url, 'user_name': user,
+                       'user_url': "http://www.banki.ru" + user_url,
+                       'user_town': user_town, 'question_datetime': question_time,
+                       'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
+                       'answer_time': answer_time, 'acces_date': str(datetime.now()),
+                       'site': "http://creditbook.ru/otvety/"})
+        Process(target=core_of_export.exportOne, args=(QA,)).start()
 
-    # try:
-    #     my_file.write(html.tostring(q[0], method='html', encoding='cp1251').decode('cp1251')+"\n")
-    #     my_file.write(html.tostring(q[1], method='html', encoding='cp1251').decode('cp1251')+"\n\n\n\n")
-    # except Exception:
-    #     my_file.write("Exception\n\n\n\n")
-    # result.append\
-    QA = ({'id': idn, 'category': thm, 'question': question, 'answer': answer,
-                   'question_url': "http://creditbook.ru/" + url, 'user_name': user,
-                   'user_url': "http://www.banki.ru" + user_url,
-                   'user_town': user_town, 'question_datetime': question_time,
-                   'expert_name': expert, 'expert_url': expert_url, 'expert_info': expert_info,
-                   'answer_time': answer_time, 'acces_date': str(datetime.now()),
-                   'site': "http://creditbook.ru/otvety/"})
-    Process(target=core_of_export.exportOne, args=(QA,)).start()
-    # , question.xpath('td/strong/text()[1]'))
-    # ,"http://www.banki.ru"+topic.get('href')])
+        # core_of_export.exportOne(QA)
 
-    # my_file.close()
-    # qua.close()
+        # , question.xpath('td/strong/text()[1]'))
+        # ,"http://www.banki.ru"+topic.get('href')])
+
+        # my_file.close()
+        # qua.close()
+    except Exception as ex:
+        print("creditbook.ru ошибка в обработке вопроса --", state, "--",thm, url, idn, ex)
     return result
 
 
@@ -140,10 +151,11 @@ def QAdriver(u, nnn):
             h = html.document_fromstring(urllib.request.urlopen(u[1] + "/start/" + str(i+1)).read()).cssselect("div.question")
             for htm in h:
                 nnn += 1
-                result.append(getQA(u[0] + " / "+ ' '.join(htm.text_content().split()),
-                      "http://creditbook.ru" + htm[0].get('href'), nnn))
+                Process(target=getQA, args=(u[0] + " / "+ ' '.join(htm.text_content().split()),
+                      "http://creditbook.ru" + htm[0].get('href'), nnn)).start()
+                # result.append(getQA(u[0] + " / "+ ' '.join(htm.text_content().split()),"http://creditbook.ru" + htm[0].get('href'), nnn))
     except Exception as ex:
-        print("creditbook.ru ошибос:", ex)
+        print("creditbook.ru ошибос в основном:", ex, u,nnn)
     return result
 
 
@@ -156,7 +168,7 @@ my_file.close()
 topicList = [["БАНКРОТСТВО БАНКОВ", "http://www.banki.ru/services/questions-answers/?id=4826772"]]
 '''
 
-#TODO параллельная загрузка
+
 # возвращает список словарей - ответов. получает номер сайта для формирвоания ID вопроса-ответа в формате:
 # 2 символна на сайт,
 # 3 символа на раздел,
@@ -172,6 +184,17 @@ def getQAcreditbook(n):
     base = []
     for tL in topicList:
         n += 100000000
-        base.extend(QAdriver(tL, n))
+        Process(target=QAdriver, args=(tL, n)).start()
+        # base.extend(QAdriver(tL, n))
     print("creditbook.ru - возврашена база")
     return base
+
+
+def main():
+    getQAcreditbook(4)
+
+# my_file = open("log.txt", "w")
+
+if __name__ == '__main__':
+    # multiprocessing.freeze_support()
+    main()
